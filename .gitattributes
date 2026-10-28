@@ -1,0 +1,12 @@
+# 统一用 LF，避免在 Windows 上 checkout 后 shell 脚本的 shebang 变成 "#!/bin/sh\r"
+* text=auto eol=lf
+*.sh   text eol=lf
+*.py   text eol=lf
+*.md   text eol=lf
+*.conf.example text eol=lf
+
+# 二进制文件不做换行转换
+*.tar  binary
+*.zip  binary
+*.png  binary
+*.ico  binary

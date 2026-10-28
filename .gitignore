@@ -1,0 +1,28 @@
+# ---- 本地真实配置（真实值放系统位置，别提交）----
+# 仓库里的 esurfing.conf 是占位符模板，要提交；本地覆盖用下面这些名字
+esurfing.local.conf
+*.local.conf
+/esurfing.acip
+/tmp/esurfing.acip
+
+# ---- 日志 / 备份 / 缓存 ----
+*.log
+*.bak
+*.bak2
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# ---- 打包产物 ----
+/ESurfing.tar
+/ESurfing*.tar
+/ESurfing*.zip
+
+# ---- 编辑器 / 系统 ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
