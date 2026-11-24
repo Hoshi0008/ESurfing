@@ -796,7 +796,7 @@ class Portal(object):
         self.cipher = None
         self.ticket = ""
         self.last_redirect = ""
-        self.server = DEFAULT_SERVERS[0]
+        self.server = DEFAULT_SERVERS[0] if DEFAULT_SERVERS else ""
         self.ticket_url = self.auth_url = self.keep_url = self.term_url = ""
 
     # ---- identity ----
@@ -1428,6 +1428,14 @@ def main():
     log("=== esurfing_win.py v%s 启动 pid=%d ===" % (VERSION, os.getpid()))
     log("[i] 配置: %s" % (conf_path or "(无，用命令行参数)"))
     log("[i] 日志: %s" % LOG_PATH)
+
+    # 没有认证服务器就别进重试循环了，否则只会反复打印同一条错
+    if not (a.server or DEFAULT_SERVERS):
+        log("[!] 没有认证服务器：请在 %s 里补一行 servers="
+            % (conf_path or "esurfing.conf"), "-")
+        log("    例：servers=<认证服务器IP>,<备用认证服务器IP>", "-")
+        log("    或用 --server <IP> 临时指定", "-")
+        return 1
 
     backoff = 5
     while True:

@@ -790,6 +790,15 @@ def main():
         a.server = ""
 
     acip = a.acip or cached_acip()
+
+    # 没有认证服务器就别进重试循环了
+    if not (a.server or DEFAULT_SERVERS):
+        print("[!] 没有认证服务器：请在 %s 里补一行 servers="
+              % (conf_path or "esurfing.conf"))
+        print("    例：servers=<认证服务器IP>,<备用认证服务器IP>")
+        print("    或用 --server <IP> 临时指定")
+        return 1
+
     while True:
         iface = a.iface or default_iface()
         ip = a.ip or iface_ip(iface)
